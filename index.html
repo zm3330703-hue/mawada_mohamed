@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مودة منصور | مصممة جرافيك</title>
+  <meta name="description" content="البورتفوليو الخاص بمودة، مصممة جرافيك مبتدئة">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========== الألوان: غيّريها من هنا بسهولة ========== */
+    :root {
+      --main: #9e3341;        /* اللون الرئيسي: قرمزي هادئ */
+      --main-soft: #f3e3d8;   /* درجة فاتحة: رملي */
+      --dark: #3b2a24;        /* لون النصوص الغامقة: بني ترابي */
+      --text: #6f5a4e;        /* لون النص العادي */
+      --bg: #faf5ee;          /* خلفية الصفحة: بيج */
+      --card: #ffffff;
+      --radius: 18px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1100px, 92%); margin: auto; }
+    section { padding: 80px 0; }
+    .section-title {
+      font-size: 2rem; font-weight: 800; color: var(--dark);
+      text-align: center; margin-bottom: 10px;
+    }
+    .section-sub { text-align: center; margin-bottom: 44px; }
+    .btn {
+      display: inline-block; padding: 12px 30px; border-radius: 50px;
+      background: var(--main); color: #fff; font-weight: 600;
+      transition: transform .25s, box-shadow .25s; border: none; cursor: pointer;
+      font-family: inherit; font-size: 1rem;
+    }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(158,51,65,.3); }
+    .btn.outline { background: transparent; color: var(--main); border: 2px solid var(--main); }
+
+    /* ========== الشريط العلوي ========== */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250,245,238,.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e8d9c8;
+    }
+    nav { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+    .logo { font-size: 1.6rem; font-weight: 800; color: var(--main); }
+    nav ul { display: flex; gap: 26px; list-style: none; }
+    nav ul a { font-weight: 600; transition: color .2s; }
+    nav ul a:hover { color: var(--main); }
+
+    /* ========== الواجهة الرئيسية ========== */
+    .hero { padding: 90px 0 70px; }
+    .hero .container {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center;
+    }
+    .hero small {
+      display: inline-block; background: var(--main-soft); color: var(--main);
+      padding: 4px 16px; border-radius: 50px; font-weight: 600; margin-bottom: 16px;
+    }
+    .hero h1 { font-size: 3rem; line-height: 1.3; color: var(--dark); font-weight: 800; }
+    .hero h1 span { color: var(--main); }
+    .hero p { margin: 18px 0 28px; max-width: 480px; }
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-art {
+      aspect-ratio: 1; border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+      background: linear-gradient(135deg, #e6c9a8, #b4545f 60%, #8a2b38);
+      display: grid; place-items: center; color: #fff; font-size: 7rem; font-weight: 800;
+      box-shadow: 0 30px 60px rgba(158,51,65,.25);
+      background: url('images/mawada.jpg') center/cover; font-size: 0;
+    }
+
+    /* ========== نبذة عني ========== */
+    .about { background: #fff; }
+    .about-box { max-width: 720px; margin: auto; text-align: center; font-size: 1.1rem; }
+    .skills { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 30px; }
+    .skills span {
+      background: var(--main-soft); color: var(--main);
+      padding: 8px 22px; border-radius: 50px; font-weight: 600;
+    }
+
+    /* ========== الأعمال ========== */
+    .filters { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 36px; }
+    .filters button {
+      padding: 8px 24px; border-radius: 50px; border: 2px solid var(--main-soft);
+      background: #fff; color: var(--text); font-family: inherit; font-size: .95rem;
+      font-weight: 600; cursor: pointer; transition: .25s;
+    }
+    .filters button.active, .filters button:hover {
+      background: var(--main); color: #fff; border-color: var(--main);
+    }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 24px; }
+    .work {
+      background: var(--card); border-radius: var(--radius); overflow: hidden;
+      box-shadow: 0 8px 26px rgba(43,34,48,.07); cursor: pointer;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .work:hover { transform: translateY(-8px); box-shadow: 0 16px 36px rgba(158,51,65,.2); }
+    .work .thumb {
+      height: 230px; display: grid; place-items: center; position: relative; overflow: hidden;
+      color: rgba(255,255,255,.9); font-weight: 800; font-size: 1.1rem;
+    }
+    .work .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .work .info { padding: 16px 20px 20px; }
+    .work h3 { color: var(--dark); font-size: 1.1rem; }
+    .work p { font-size: .9rem; color: var(--main); font-weight: 600; }
+    .work.hide { display: none; }
+    /* ألوان بديلة تظهر حتى تضيفي صورك */
+    .c1 { background: linear-gradient(135deg, #c4707a, #9e3341); }  /* قرمزي */
+    .c2 { background: linear-gradient(135deg, #e0a283, #b5593a); }  /* تيراكوتا */
+    .c3 { background: linear-gradient(135deg, #ecd0a0, #c49a52); }  /* رملي ذهبي */
+    .c4 { background: linear-gradient(135deg, #b9b88a, #7a7a45); }  /* زيتوني */
+    .c5 { background: linear-gradient(135deg, #c9a98f, #7d5a45); }  /* موكا */
+    .c6 { background: linear-gradient(135deg, #d9a090, #a5513f); }  /* طين */
+
+    /* ========== تكبير الصورة ========== */
+    .lightbox {
+      position: fixed; inset: 0; background: rgba(20,12,24,.88); z-index: 100;
+      display: none; place-items: center; padding: 20px;
+    }
+    .lightbox.open { display: grid; }
+    .lightbox-content {
+      max-width: 900px; width: 100%; background: #fff; border-radius: var(--radius);
+      overflow: hidden; position: relative; text-align: center;
+    }
+    .lightbox-content .big { height: min(60vh, 500px); position: relative; display: grid; place-items: center; color: #fff; font-size: 1.4rem; font-weight: 800; }
+    .lightbox-content .big img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #111; }
+    .lightbox-content .cap { padding: 16px; font-weight: 600; color: var(--dark); }
+    .close {
+      position: absolute; top: 12px; left: 12px; z-index: 2; width: 40px; height: 40px;
+      border-radius: 50%; border: none; background: #fff; font-size: 1.4rem; cursor: pointer;
+    }
+
+    /* ========== التواصل ========== */
+    .contact { background: linear-gradient(135deg, #b4444f, #7f2634); color: #fff; text-align: center; }
+    .contact .section-title { color: #fff; }
+    .contact p { max-width: 520px; margin: 0 auto 30px; opacity: .92; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+    .contact-links a {
+      background: #fff; color: var(--main); padding: 12px 28px; border-radius: 50px;
+      font-weight: 600; transition: transform .25s;
+    }
+    .contact-links a:hover { transform: translateY(-3px); }
+
+    footer { text-align: center; padding: 22px; font-size: .9rem; background: #fff; }
+
+    /* ========== الموبايل ========== */
+    @media (max-width: 800px) {
+      .hero .container { grid-template-columns: 1fr; text-align: center; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { margin-inline: auto; }
+      .hero-buttons { justify-content: center; }
+      .hero-art { max-width: 260px; margin: auto; font-size: 5rem; order: -1; }
+      nav ul { gap: 14px; font-size: .9rem; }
+      section { padding: 60px 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- الشريط العلوي -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#home" class="logo">مودة منصور</a>
+        <ul>
+          <li><a href="#about">عني</a></li>
+          <li><a href="#works">أعمالي</a></li>
+          <li><a href="#contact">تواصل</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- الواجهة الرئيسية -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div>
+        <small>✨ مصممة جرافيك</small>
+        <h1>أهلاً، أنا <span>مودة</span><br>أحوّل الأفكار إلى تصاميم</h1>
+        <p>مصممة جرافيك مبتدئة، شغوفة بالألوان والهوية البصرية، وأتعلم وأطوّر نفسي مع كل تصميم جديد.</p>
+        <div class="hero-buttons">
+          <a href="#works" class="btn">شاهد أعمالي</a>
+          <a href="#contact" class="btn outline">تواصل معي</a>
+        </div>
+      </div>
+      <div class="hero-art"></div>
+    </div>
+  </section>
+
+  <!-- نبذة عني -->
+  <section class="about" id="about">
+    <div class="container">
+      <h2 class="section-title">نبذة عني</h2>
+      <p class="section-sub">لتتعرّف عليّ أكثر</p>
+      <div class="about-box">
+        <p>
+          أنا مودة، مصممة جرافيك مهتمة بالألوان والتفاصيل والهوية البصرية، وأسعى لتحويل الأفكار إلى تصاميم إبداعية تجمع بين البساطة والجمال.
+        </p>
+        <div class="skills">
+          <span>Photoshop</span>
+          <span>Illustrator</span>
+          <span>Canva</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- الأعمال -->
+  <section id="works">
+    <div class="container">
+      <h2 class="section-title">أعمالي</h2>
+      <p class="section-sub">مجموعة من تصاميمي</p>
+
+      <div class="filters">
+      </div>
+
+      <!--
+        لإضافة صورك:
+        1) أنشئي مجلد اسمه images بجانب هذا الملف
+        2) ضعي صورك فيه باسم work1.jpg و work2.jpg ... إلخ
+        3) غيّري العنوان (h3) والتصنيف (p) كما تريدين
+        لإضافة عمل جديد: انسخي أي بطاقة <article> كاملة والصقيها.
+        data-cat يجب أن يكون: logo أو social أو poster
+      -->
+      <div class="grid">
+        <article class="work" data-cat="logo">
+          <div class="thumb c1"><span>عمل 1</span><img src="images/work1.png" alt="شعار" onerror="this.remove()"></div>
+          <div class="info"><h3>كارت لمحل زهور</h3></div>
+        </article>
+
+        <article class="work" data-cat="social">
+          <div class="thumb c2"><span>عمل 2</span><img src="images/work2.png" alt="منشور" onerror="this.remove()"></div>
+          <div class="info"><h3>كارت لمحل زهور</h3></div>
+        </article>
+
+        <article class="work" data-cat="poster">
+          <div class="thumb c3"><span>عمل 3</span><img src="images/work3.jpg" alt="بوستر" onerror="this.remove()"></div>
+          <div class="info"><h3>بوستر إعلاني</h3></div>
+        </article>
+
+        <article class="work" data-cat="logo">
+          <div class="thumb c4"><span>عمل 4</span><img src="images/work4.jpg" alt="شعار" onerror="this.remove()"></div>
+          <div class="info"><h3>بروشور</h3></div>
+        </article>
+
+        <article class="work" data-cat="social">
+          <div class="thumb c5"><span>عمل 5</span><img src="images/work5.jpg" alt="منشور" onerror="this.remove()"></div>
+          <div class="info"><h3>بروشور</h3></div>
+        </article>
+
+        <article class="work" data-cat="poster">
+          <div class="thumb c6"><span>عمل 6</span><img src="images/work6.png" alt="بوستر" onerror="this.remove()"></div>
+          <div class="info"><h3>بوست</h3></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- التواصل -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2 class="section-title">لنعمل معاً</h2>
+      <p>عندك فكرة أو مشروع؟ يسعدني أسمع منك وأساعدك تحوّليها لتصميم جميل.</p>
+      <div class="contact-links">
+        <!-- غيّري الروابط التالية ببياناتك -->
+        <a href="mailto:zm3330703@gmail.com">📧 البريد الإلكتروني</a>
+        <a href="https://instagram.com/mawadaaboesmaeel?obrf=MXduZG5xMGQzaXl6eQ%3D%3D" target="_blank" rel="noopener">📸 انستجرام</a>
+        <a href="https://behance.net/mawadamohamed22" target="_blank" rel="noopener">🎨 بيهانس</a>
+        <a href="https://wa.me/201098841662" target="_blank" rel="noopener">💬 واتساب</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>© <span id="year"></span> مودة · جميع الحقوق محفوظة</footer>
+
+  <!-- نافذة تكبير العمل -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <button class="close" id="closeBox" aria-label="إغلاق">×</button>
+      <div class="big" id="bigBox"></div>
+      <div class="cap" id="bigCap"></div>
+    </div>
+  </div>
+
+  <script>
+    // السنة تلقائياً
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // فلترة الأعمال
+    const buttons = document.querySelectorAll('.filters button');
+    const works = document.querySelectorAll('.work');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        works.forEach(w => w.classList.toggle('hide', f !== 'all' && w.dataset.cat !== f));
+      });
+    });
+
+    // تكبير العمل عند الضغط
+    const box = document.getElementById('lightbox');
+    const big = document.getElementById('bigBox');
+    const cap = document.getElementById('bigCap');
+    works.forEach(w => {
+      w.addEventListener('click', () => {
+        const thumb = w.querySelector('.thumb');
+        big.className = 'big ' + [...thumb.classList].find(c => /^c\d$/.test(c));
+        big.innerHTML = thumb.innerHTML;
+        cap.textContent = w.querySelector('h3').textContent;
+        box.classList.add('open');
+      });
+    });
+    const closeBox = () => box.classList.remove('open');
+    document.getElementById('closeBox').addEventListener('click', closeBox);
+    box.addEventListener('click', e => { if (e.target === box) closeBox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBox(); });
+  </script>
+</body>
+</html>
